@@ -1,0 +1,539 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #1a1a1a; /* Dark Rock & Roll Vibe */
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* This ensures that when you scroll to #booking, it stops 50px ABOVE the section */
+    scroll-padding-top: 50px; 
+}
+
+/* Highlight the form when scrolled to */
+#booking:target {
+    animation: highlightSection 1.5s ease-out;
+}
+
+@keyframes highlightSection {
+    0% { background-color: #333; }
+    100% { background-color: #111; }
+}
+
+/* Make the inputs glow when clicked */
+.booking-form input:focus, .booking-form textarea:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    transition: 0.3s;
+}
+
+
+/* Custom Branding for the Band Name */
+.band-name {
+    font-family: 'Georgia', serif; /* Gives it a classic, timeless feel */
+    font-size: 4.5rem;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+/* Mobile tweak for the longer name */
+@media (max-width: 600px) {
+    .band-name {
+        font-size: 2.5rem;
+    }
+}
+
+/* Hero Section */
+
+/* Animation for the very first load */
+.hero-entrance {
+    animation: stageLightsOn 1.5s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes stageLightsOn {
+    0% {
+        opacity: 0;
+        transform: scale(1.1); /* Starts slightly zoomed in */
+        filter: brightness(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1); /* Settles to normal size */
+        filter: brightness(1);
+    }
+}
+
+/* Stagger the text inside the hero so it pops up after the background */
+.hero-content h1 {
+    animation: slideUp 1s ease-out 0.5s forwards;
+    opacity: 0;
+}
+
+.hero-content p, .hero-content .cta-button {
+    animation: slideUp 1s ease-out 0.8s forwards;
+    opacity: 0;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero {
+    height: 80vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('cropped1.jpeg'); /* Sample stage photo */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #ffd700; /* Gold accent */
+}
+
+.cta-button {
+    padding: 15px 40px;
+    background-color: #ffd700;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.1);
+    background-color: #fff;
+}
+
+/* Sound Section */
+.sound-section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.sound-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    border-bottom: 2px solid #ffd700;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.video-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.video-card {
+    flex: 1 1 300px; /* This makes it flexible/responsive */
+    background: #2a2a2a;
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 200px;
+    background: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    color: #888;
+}
+
+
+/* About Section */
+.about-section {
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-section p {
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+/* Prophets Section Styling */
+/* Optimized Prophets Section Styling */
+.prophets-section {
+    padding: 100px 20px; /* Large gap top and bottom */
+    background-color: #111;
+    text-align: center;
+}
+
+.prophets-section h2 {
+    margin-bottom: 20px; /* Gap between "MEET MARCIA..." and the subtitle */
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.prophets-section .subtitle {
+    display: block;
+    margin-bottom: 80px; /* This is the specific space you wanted increased */
+    font-size: 1.1rem;
+    letter-spacing: 5px;
+    color: #ffd700;
+    text-transform: uppercase;
+}
+
+.prophets-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1300px; /* Slightly wider for the 5 cards */
+    margin: 0 auto;
+}
+
+.prophet-card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 30px 20px;
+    border-radius: 10px;
+    width: 220px; /* Perfect size for 5 members on a wide screen */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.prophet-card:hover {
+    transform: translateY(-10px);
+    border-color: #ffd700;
+}
+
+.member-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.prophet-card h3 {
+    color: #ffd700;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.prophet-card p {
+    color: #888;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mobile Fix: Make cards full width if screen is tiny */
+@media (max-width: 600px) {
+    .prophet-card {
+        width: 100%;
+    }
+}
+
+/* Booking Section */
+.booking-section {
+    padding: 80px 20px;
+    background-color: #111;
+}
+
+.booking-form {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    gap: 20px;
+}
+
+.booking-form input, .booking-form textarea {
+    width: 100%;
+    padding: 15px;
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.submit-button {
+    background-color: #ffd700;
+    color: #000;
+    padding: 15px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #fff;
+    letter-spacing: 2px;
+}
+
+/* Scroll Animation Classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+    .form-group {
+        flex-direction: column;
+    }
+}
+
+
+/* Setlist Table Styling */
+.custom-setlist-container {
+    margin: 30px 0;
+    overflow-x: auto; /* Makes it scrollable on small screens */
+}
+
+#setlistTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#setlistTable th, #setlistTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+#setlistTable th {
+    color: #ffd700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+#setlistTable input {
+    width: 100%;
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.secondary-button {
+    background: transparent;
+    color: #ffd700;
+    border: 1px solid #ffd700;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.secondary-button:hover {
+    background: #ffd700;
+    color: #000;
+}
+
+.remove-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+/* Terms & Conditions Styling */
+.terms-container {
+    margin: 30px 0;
+    text-align: left;
+    background: #111;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #ffd700; /* Gold accent bar */
+}
+
+.terms-container h3 {
+    color: #ffd700;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.terms-box {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.terms-box ul {
+    list-style: none;
+}
+
+.terms-box li {
+    font-size: 0.95rem;
+    color: #ccc;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.terms-box li strong {
+    color: #fff;
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: #ffd700;
+    cursor: pointer;
+}
+
+.terms-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #ffd700;
+}
+
+/* Ensure the Hero is always visible so the page isn't black on load */
+.hero.fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Fallback: if JS fails, show everything after 2 seconds */
+@media (prefers-reduced-motion: no-preference) {
+    .fade-in {
+        animation: fallbackShow 0s forwards;
+        animation-delay: 2s; 
+    }
+}
+
+@keyframes fallbackShow {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Footer Styling */
+.main-footer {
+    background-color: #000;
+    color: #fff;
+    padding: 60px 20px 20px 20px;
+    text-align: center;
+    border-top: 2px solid #ffd700;
+}
+
+.footer-logo {
+    font-family: 'Georgia', serif;
+    font-size: 1.8rem;
+    color: #ffd700;
+    margin-bottom: 5px;
+}
+
+.footer-tagline {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.footer-links {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.footer-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #ffd700;
+}
+
+.footer-divider {
+    border: 0;
+    height: 1px;
+    background: #333;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+}
+
+.copyright-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.back-to-top {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Mobile Footer Fix */
+@media (max-width: 600px) {
+    .copyright-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

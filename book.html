@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE FAMILY BAND | BOOKING</title>
+    <link rel="stylesheet" href="book.css">
+</head>
+<body>
+
+<title>MARCIA, MARC & THE PROPHETS | BOOKING</title>
+
+<header class="hero hero-entrance">
+    <div class="hero-content">
+        <h1 class="band-name">MARCIA, MARC & THE PROPHETS</h1>
+        <p>AUTHENTIC 1950s ROCK & ROLL FOR YOUR NEXT EVENT</p>
+        <a href="#booking" class="cta-button">BOOK THE BAND</a>
+    </div>
+</header>
+
+    <section class="about-section fade-in">
+        <h2>OUR STORY</h2>
+        <p>We are a family brought together by a shared love for the golden era of Rock & Roll. From the twang of the guitar to the rhythm of the 50s, we bring high-energy, authentic performances to every stage we step on.</p>
+    </section>
+
+<section class="prophets-section fade-in">
+    <h2>MEET MARCIA, MARC & THE PROPHETS</h2>
+    <p class="subtitle">THE VOICES BEHIND THE MAGIC</p>
+    
+    <div class="prophets-grid">
+        <div class="prophet-card">
+            <div class="member-icon">🎤</div>
+            <h3>MARC</h3>
+            <p>Main Male Vocalist</p>
+        </div>
+        <div class="prophet-card">
+            <div class="member-icon">🎙️</div>
+            <h3>MARCIA</h3>
+            <p>Main Female Vocalist</p>
+        </div>
+        <div class="prophet-card">
+            <div class="member-icon">🎹</div>
+            <h3>ISAIAH</h3>
+            <p>Vocalist & Keyboardist</p>
+        </div>
+        <div class="prophet-card">
+            <div class="member-icon">🎸</div>
+            <h3>SAMUEL</h3>
+            <p>Vocalist & Guitarist</p>
+        </div>
+        <div class="prophet-card">
+            <div class="member-icon">🎸</div>
+            <h3>DANIEL</h3>
+            <p>Vocalist & Guitarist</p>
+        </div>
+    </div>
+</section>
+
+    <section id="booking" class="booking-section fade-in">
+    <h2>RESERVE YOUR DATE</h2> 
+    <form id="contactForm" class="booking-form">
+        <div class="form-group">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Email Address" required>
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="Event Date" required>
+            <input type="text" placeholder="Event Location" required>
+        </div>
+
+        <div class="custom-setlist-picker">
+            <h3>SELECT YOUR VIBE</h3>
+            <p class="subtitle">Pick the tracks you want us to play:</p>
+            
+            <div class="custom-setlist-container">
+    <h3>CREATE YOUR SETLIST</h3>
+    <p class="subtitle">Enter the songs and artists you'd like us to play:</p>
+    
+    <table id="setlistTable">
+        <thead>
+            <tr>
+                <th>Song Name</th>
+                <th>Artist</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="setlistBody">
+            <tr>
+                <td><input type="text" name="song_name[]" placeholder="e.g. Johnny B. Goode" required></td>
+                <td><input type="text" name="artist_name[]" placeholder="e.g. Chuck Berry" required></td>
+                <td></td> </tr>
+        </tbody>
+    </table>
+
+    <button type="button" id="addSongBtn" class="secondary-button">+ ADD ANOTHER SONG</button>
+</div>
+        </div>
+
+        <textarea placeholder="Any other special requests or specific artists?" rows="5"></textarea>
+        <button type="submit" class="submit-button">SEND BOOKING REQUEST</button>
+    </form>
+
+    <div class="terms-container">
+    <h3>BOOKING POLICY & TERMS</h3>
+    <div class="terms-box">
+        <ul>
+            <li><strong>Last-Minute Bookings:</strong> For requests made within a few days of the event, please note that custom song requests may not be performed due to limited rehearsal time.</li>
+            <li><strong>Song Availability:</strong> Performance of specific requests is subject to our current repertoire and the availability of high-quality backing tracks.</li>
+            <li><strong>Pricing & Details:</strong> Final event specifications and confirmation will be sent to your Gmail. <strong>Please note:</strong> All pricing discussions and final quotes will be handled exclusively via phone call.</li>
+        </ul>
+    </div>
+    
+    <label class="terms-checkbox">
+        <input type="checkbox" required> 
+        I have read and agree to the booking terms and pricing policy.
+    </label>
+</div>
+</section>
+
+<footer class="main-footer">
+    <div class="footer-content">
+        <h2 class="footer-logo">MARCIA, MARC & THE PROPHETS</h2>
+        <p class="footer-tagline">KEEPING THE SPIRIT OF '55 ALIVE.</p>
+        
+        <div class="footer-links">
+            <a href="#booking">Book Now</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#booking">Terms & Conditions</a>
+        </div>
+
+        <hr class="footer-divider">
+
+        <div class="copyright-info">
+            <p>&copy; 2026 MARCIA, MARC & THE PROPHETS. ALL RIGHTS RESERVED.</p>
+            <a href="#" class="back-to-top">Back to Top &uarr;</a>
+        </div>
+    </div>
+</footer>
+
+    <script src="book.js"></script>
+</body>
+</html>
