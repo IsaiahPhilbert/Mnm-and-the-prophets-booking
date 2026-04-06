@@ -201,6 +201,90 @@ html {
     background-color: #fff;
 }
 
+/* Container for the About Section */
+.about-section {
+   padding: 60px 20px;
+    background: #000; /* Pure black for maximum contrast */
+    color: #fff;
+    text-align: center;
+
+    width: 90%;
+    border-radius: 30px;
+    max-width: 1000px;
+    margin: 50px auto;
+
+    border: 1px solid #222;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.about-container {
+    max-width: 750px; /* Narrower width is MUCH easier to read */
+    margin: 0 auto;
+}
+
+.about-title {
+   font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+   margin-bottom: 5px;
+    line-height: 1.2;
+    color: #fff;
+}
+
+.about-title span {
+    color: #ffd700;
+    font-weight: 300; /* Thinner font for the second line looks classy */
+}
+
+.divider {
+    width: 40px;
+    height: 2px;
+    background: #ffd700;
+    margin: 15px auto;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #bbb; /* Slightly dimmer white so it doesn't strain eyes */
+    margin-bottom: 15px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* The Genre Highlights */
+.gold {
+    color: #ffd700;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+/* Subtle glow effect on the divider */
+.divider {
+    box-shadow: 0 0 10px rgba(255, 214, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        padding: 40px 20px;
+        border-radius: 25px; /* Slightly smaller radius for small screens */
+    }
+    
+    .about-title {
+        font-size: 1.8rem; /* Smaller title so it doesn't wrap weirdly */
+    }
+    
+    .about-text {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+}
+
 /* Sound Section */
 .sound-section {
     padding: 80px 20px;
@@ -536,6 +620,76 @@ html {
     }
 }
 
+/* This class will remove the guest count if without sound in chosen */
+/* The base state (Visible) */
+#guestCountGroup {
+    max-height: 200px; /* Big enough to fit the input */
+    opacity: 1;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth "eased" movement */
+    margin-bottom: 25px;
+    transform: translateY(0);
+}
+
+/* The hidden state (Smoothly disappears) */
+#guestCountGroup.hidden-field {
+    max-height: 0;
+    opacity: 0;
+    margin-bottom: 0;
+    margin-top: -25px; /* Pulls the next element up smoothly */
+    transform: translateY(-10px);
+    pointer-events: none; /* Prevents clicking it while invisible */
+}
+
+/* Ensure the phone container takes full width */
+.phone-container .iti {
+    width: 100%;
+}
+
+/* Match the input style to your existing theme */
+#phone {
+    width: 100% !important;
+    padding: 15px 15px 15px 52px !important; /* Extra left padding for the flag */
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Dark theme fix for the country list dropdown */
+.iti__country-list {
+    background-color: #222 !important;
+    border: 1px solid #444 !important;
+    color: white !important;
+}
+
+.iti__country:hover, .iti__highlight {
+    background-color: #333 !important;
+}
+
+.iti__country-name, .iti__dial-code {
+    color: #eee;
+}
+
+/* Fix the overlap by forcing enough padding on the left */
+.iti--separate-dial-code #phone {
+    padding-left: 95px !important; /* Adjust this number if it still looks tight */
+}
+
+/* Ensure the container doesn't collapse */
+.iti {
+    width: 100%;
+    display: block;
+}
+
+/* Optional: Subtle glow to match your theme when focused */
+#phone:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
 
 /* Setlist Table Styling */
 .custom-setlist-container {
@@ -594,6 +748,25 @@ html {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 3px;
+}
+
+.setlist-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    flex-wrap: wrap; /* Prevents overlap on small phones */
+}
+
+.copy-btn {
+    background: transparent !important;
+    border: 1px solid #ffd700 !important;
+    color: #ffd700 !important;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background: #ffd700 !important;
+    color: #000 !important;
 }
 
 /* Terms & Conditions Styling */
@@ -805,6 +978,70 @@ html {
     }
 }
 
+/* Container for the policy card inside the form */
+.policy-card-wrapper {
+    margin: 30px 0;
+    padding-left: 20px;
+    border-left: 3px solid #ffd700; /* The Yellow Vertical Line */
+    text-align: left;
+}
+
+.policy-header {
+    color: #ffd700;
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.policy-text-area {
+    background: rgba(255, 255, 255, 0.03); /* Very subtle dark lift */
+    padding: 15px 0; /* Keeps it thin */
+    color: #bbb;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.policy-text-area p {
+    margin-bottom: 12px;
+}
+
+/* The Checkbox Area */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #ffd700; /* Makes the checkmark gold */
+    cursor: pointer;
+}
+
+.checkbox-container span {
+    color: #ffd700;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Mobile Tweak */
+@media (max-width: 600px) {
+    .policy-card-wrapper {
+        padding-left: 15px;
+    }
+    .policy-header {
+        font-size: 1rem;
+    }
+}
+
+
+
 /* SUCCESS OVERLAY STYLE */
 .success-overlay {
     display: none; /* Hidden until JS triggers it */
@@ -873,4 +1110,105 @@ html {
     color: #ffd700 !important;
     cursor: not-allowed;
     border: 1px solid #ffd700;
+}
+
+
+/* --- RESPONSIVE OVERRIDES (DO NOT REMOVE EXISTING STYLES) --- */
+
+/* For Tablets and smaller */
+@media (max-width: 992px) {
+    .prophets-grid {
+        gap: 15px;
+    }
+    .prophet-card {
+        width: calc(50% - 20px); /* 2 per row */
+        min-width: 200px;
+    }
+}
+
+/* For Phones (The "Make it Responsive" magic) */
+@media (max-width: 600px) {
+    /* Hero Text Adjustments */
+    .band-name {
+        font-size: 2.2rem;
+        padding: 0 10px;
+    }
+    .hero-content p {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+    .hero {
+        height: 70vh; /* Slightly shorter on mobile */
+    }
+
+    /* About Section */
+    .about-section {
+        width: 95%;
+        padding: 30px 15px;
+        margin: 20px auto;
+    }
+    .about-title {
+        font-size: 1.5rem;
+    }
+
+    /* Prophets Section */
+    .prophets-section h2 {
+        font-size: 1.8rem;
+    }
+    .prophet-card {
+        width: 100%; /* Full width stack on mobile */
+    }
+
+    /* Booking Form Layout */
+    .form-group {
+        flex-direction: column; /* Stack Name/Email and Date/Location */
+        gap: 15px;
+    }
+
+    /* Setlist Table Mobile Fix */
+    .custom-setlist-container {
+        overflow-x: auto;
+    }
+    #setlistTable th {
+        font-size: 0.7rem;
+    }
+    #setlistTable input {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    /* Policy Card Line Fix */
+    .policy-card-wrapper {
+        padding-left: 10px;
+        margin: 20px 0;
+    }
+    .checkbox-container label {
+        font-size: 0.8rem;
+    }
+
+    /* Success Screen Mobile */
+    .success-card h2 {
+        font-size: 2.2rem;
+    }
+    .success-icon {
+        font-size: 50px;
+    }
+
+    /* Footer Copyright Stack */
+    .copyright-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 400px) {
+    .date-selectors {
+        flex-direction: column;
+    }
+    .secondary-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }

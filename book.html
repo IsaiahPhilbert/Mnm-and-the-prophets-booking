@@ -6,6 +6,7 @@
     <title>THE FAMILY BAND | BOOKING</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <link rel="stylesheet" href="book.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
 </head>
 <body>
 
@@ -16,15 +17,25 @@
     
     <div class="hero-content">
         <h1 class="band-name">MARCIA, MARC & THE PROPHETS</h1>
-        <p>AUTHENTIC 1950s ROCK & ROLL FOR YOUR NEXT EVENT</p>
+        <p>AUTHENTIC RETRO BAND FOR YOUR NEXT EVENT</p>
         <a href="#booking" class="cta-button">BOOK THE BAND</a>
     </div>
 </header>
 
-    <section class="about-section fade-in">
-        <h2>OUR STORY</h2>
-        <p>We are a family brought together by a shared love for the golden era of Rock & Roll. From the twang of the guitar to the rhythm of the 50s, we bring high-energy, authentic performances to every stage we step on.</p>
-    </section>
+  <section class="about-section fade-in">
+    <div class="about-container">
+        <h2 class="about-title">FROM VINTAGE CLASSICS <br><span>TO MODERN ANTHEMS</span></h2>
+        <div class="divider"></div>
+        <p class="about-text">
+             We are a <b>family</b> brought together by a shared love for the golden era of Retro Music. Marcia, Marc & The Prophets aren't just a cover band; we are a high-octane journey through music history. From the smooth sophistication of <strong class="gold">Jazz</strong>, the electrifying birth of <strong class="gold">Rock & Roll</strong>, and the soul-stirring rhythms of the <strong class="gold">1950s and 60s</strong>, to the chart-topping <strong class="gold">Billboard hits</strong> of today.
+        </p>
+        <p class="about-text">
+            We bring a world-class energy defined by performances on both national and international stages. Whether it's a vintage nostalgic classic or a modern floor-filler, we deliver every note with the precision and soul your event deserves.
+        </p>
+    </div>
+</section>
+
+   
 
 <section class="prophets-section fade-in">
     <h2>MEET MARCIA, MARC & THE PROPHETS</h2>
@@ -79,6 +90,11 @@
         <input type="text" name="Name" placeholder="Your Name" required>
         <input type="email" name="Email" placeholder="Email Address" required>
     </div>
+
+    <div class="form-group phone-container">
+    <input type="tel" id="phone" name="Phone" required>
+    </div>
+
     <div class="form-group">
         <div class="date-dropdown-container">
     <label>EVENT DATE</label>
@@ -118,14 +134,14 @@
             <h3>SOUND SYSTEM REQUIREMENT</h3>
             <div class="radio-group">
                 <label><input type="radio" name="Sound_Requirement" value="With Sound" required> With Sound (Band provides PA)</label>
-                <label><input type="radio" name="Sound_Requirement" value="Without Sound"> Without Sound (Venue provides PA)</label>
+                <label><input type="radio" name="Sound_Requirement" value="Without Sound"> Without Sound (Cilent provides PA)</label>
             </div>
         </div>
 
-        <div class="option-group">
-            <h3>GUEST COUNT FOR AUDIO PRECISION</h3>
-            <input type="number" name="Guest_Count" placeholder="How many people present to provide ample sound?" min="1" required>
-        </div>
+        <div class="option-group" id="guestCountGroup">
+    <h3>GUEST COUNT FOR AUDIO PRECISION</h3>
+    <input type="number" id="guestCountInput" name="Guest_Count" placeholder="How many people present to provide ample sound?" min="1">
+</div>
 
         <div class="option-group">
             <h3>SELECT BAND LINEUP</h3>
@@ -159,37 +175,42 @@
             </tbody>
         </table>
         <button type="button" id="addSongBtn" class="secondary-button">+ ADD ANOTHER SONG</button>
+        <button type="button" id="copySetlistBtn" class="secondary-button copy-btn">📋 COPY SETLIST</button>
     </div>
 
     <textarea name="Special_Requests" placeholder="Any other special requests?" rows="5"></textarea>
+
+
+    <div class="policy-card-wrapper">
+    <div class="policy-content">
+        <h3 class="policy-header">BOOKING POLICY & TERMS</h3>
+        
+        <div class="policy-text-area">
+            <p><strong>Last-Minute Bookings:</strong> For requests made within a few days of the event, please note that custom song requests may not be performed due to limited rehearsal time.</p>
+            <p><strong>Song Availability:</strong> Performance of specific requests is subject to our current repertoire and the availability of high-quality backing tracks.</p>
+            <p><strong>Pricing & Details:</strong> Final event specifications and confirmation will be sent to your Gmail. <strong>Please note:</strong> All pricing discussions and final quotes will be handled exclusively via phone call.</p>
+        </div>
+
+        <div class="checkbox-container">
+            <input type="checkbox" id="termsCheckbox" required>
+            <label for="termsCheckbox">
+                I have read and agree to the <span>booking terms</span> and <span>pricing policy.</span>
+            </label>
+        </div>
+    </div>
+</div>
+
     <button type="submit" class="submit-button">
     <span class="spinner"></span> SEND BOOKING REQUEST
 </button>
 
 </form>
-
-
-    <div class="terms-container">
-    <h3>BOOKING POLICY & TERMS</h3>
-    <div class="terms-box">
-        <ul>
-            <li><strong>Last-Minute Bookings:</strong> For requests made within a few days of the event, please note that custom song requests may not be performed due to limited rehearsal time.</li>
-            <li><strong>Song Availability:</strong> Performance of specific requests is subject to our current repertoire and the availability of high-quality backing tracks.</li>
-            <li><strong>Pricing & Details:</strong> Final event specifications and confirmation will be sent to your Gmail. <strong>Please note:</strong> All pricing discussions and final quotes will be handled exclusively via phone call.</li>
-        </ul>
-    </div>
-    
-    <label class="terms-checkbox">
-        <input type="checkbox" required> 
-        I have read and agree to the booking terms and pricing policy.
-    </label>
-</div>
 </section>
 
 <footer class="main-footer">
     <div class="footer-content">
         <h2 class="footer-logo">MARCIA, MARC & THE PROPHETS</h2>
-        <p class="footer-tagline">KEEPING THE SPIRIT OF '55 ALIVE.</p>
+        <p class="footer-tagline">KEEPING THE SPIRIT OF LIVE MUSIC ALIVE.</p>
         
         <div class="footer-links">
             <a href="#booking">Book Now</a>
@@ -217,7 +238,7 @@
 </div>
 
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
     <script src="book.js"></script>
 
 </body>

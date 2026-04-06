@@ -53,63 +53,75 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. FORM SUBMISSION
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.onsubmit = async function(e) {
-            e.preventDefault();
+   // 3. FORM SUBMISSION (CLEANED & MERGED)
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.onsubmit = async function(e) {
+        e.preventDefault();
 
-            const btn = this.querySelector('.submit-button');
-            btn.innerHTML = '<span class="spinner"></span> SENDING...';
-            btn.disabled = true;
+        // 1. Validate Checkbox
+        const termsCheck = document.getElementById('termsCheckbox');
+        if (!termsCheck.checked) {
+            alert("Please agree to the booking terms and pricing policy before submitting.");
+            return;
+        }
 
-            // Create the clean setlist string for your email
+        // 2. Button Loading State
+        const btn = this.querySelector('.submit-button');
+        const originalBtnText = btn.innerHTML;
+        btn.innerHTML = '<span class="spinner"></span> SENDING...';
+        btn.disabled = true;
+
+        try {
+            // 3. Collect Data
+            const fullPhoneNumber = iti.getNumber();
+            
             let setlistItems = "";
             document.querySelectorAll('#setlistBody tr').forEach((row, index) => {
                 const songInput = row.querySelector('input[name="Song[]"]');
                 const artistInput = row.querySelector('input[name="Artist[]"]');
-                
                 if(songInput && artistInput && songInput.value) {
                     setlistItems += `${index + 1}. ${songInput.value} — ${artistInput.value}\n`;
                 }
             });
-            
-            const dayVal = document.getElementById('day').value;
-            const monthVal = document.getElementById('month').value;
-            const yearVal = document.getElementById('year').value;
-            const fullDate = `${dayVal} ${monthVal} ${yearVal}`;
+
+            const soundReqElement = this.querySelector('input[name="Sound_Requirement"]:checked');
+            const soundReqValue = soundReqElement ? soundReqElement.value : "Not Specified";
+            const guestsValue = document.getElementById('guestCountInput').value || "N/A";
+            const fullDate = `${document.getElementById('day').value} ${document.getElementById('month').value} ${document.getElementById('year').value}`;
 
             const templateParams = {
                 name: this.Name.value,
                 email: this.Email.value,
+                phone: fullPhoneNumber,
                 date: fullDate,
                 location: this.Event_Location.value,
-                sound: this.querySelector('input[name="Sound_Requirement"]:checked').value,
+                sound: soundReqValue,
                 lineup: this.querySelector('input[name="Band_Lineup"]:checked').value,
-                guests: this.Guest_Count.value,
+                guests: guestsValue,
                 setlist: setlistItems, 
                 notes: this.Special_Requests.value
             };
 
-            emailjs.send('service_3sv2b0g', 'template_uzidfe5', templateParams)
-                .then(() => {
-                    // 1. Clear the form
-                    this.reset();
-                    document.getElementById('setlistBody').innerHTML = `<tr><td><input type="text" name="Song[]" placeholder="e.g. Johnny B. Goode" required></td><td><input type="text" name="Artist[]" placeholder="e.g. Chuck Berry" required></td><td></td></tr>`;
-                    
-                    // 2. SHOW THE SUCCESS SCREEN
-                    const overlay = document.getElementById('successOverlay');
-                    if(overlay) overlay.style.display = 'flex';
-                })
-                .catch((error) => {
-                    alert('Oops! Check your internet connection.');
-                    console.log(error);
-                })
-                .finally(() => {
-                    btn.innerText = "SEND BOOKING REQUEST";
-                    btn.disabled = false;
-                });
-        };
-    }
+            // 4. Send via EmailJS
+            await emailjs.send('service_3sv2b0g', 'template_uzidfe5', templateParams);
+
+            // 5. Success Actions
+            this.reset();
+            document.getElementById('setlistBody').innerHTML = `<tr><td><input type="text" name="Song[]" placeholder="e.g. Johnny B. Goode" required></td><td><input type="text" name="Artist[]" placeholder="e.g. Chuck Berry" required></td><td></td></tr>`;
+            
+            const overlay = document.getElementById('successOverlay');
+            if(overlay) overlay.style.display = 'flex';
+
+        } catch (error) {
+            alert('Oops! Check your internet connection.');
+            console.error(error);
+        } finally {
+            btn.innerHTML = "SEND BOOKING REQUEST";
+            btn.disabled = false;
+        }
+    };
+}
 
   // 4. PRECISE SMOOTH SCROLL
     document.querySelectorAll('.back-to-top, a[href^="#"]').forEach(anchor => {
@@ -158,6 +170,53 @@ if (yearSelect) {
         yearSelect.appendChild(opt);
     }
 }
+
+const soundRadios = document.querySelectorAll('input[name="Sound_Requirement"]');
+    const guestCountGroup = document.getElementById('guestCountGroup');
+    const guestCountInput = document.querySelector('input[name="Guest_Count"]');
+
+    soundRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.value === "Without Sound") {
+                // Smoothly hide
+                guestCountGroup.classList.add('hidden-field');
+                guestCountInput.removeAttribute('required');
+                // Optional: Clear the value so it doesn't send 
+                // data you don't need
+                guestCountInput.value = ""; 
+            } else {
+                // Smoothly show
+                guestCountGroup.classList.remove('hidden-field');
+                guestCountInput.setAttribute('required', '');
+            }
+        });
+    });
+
+
+const phoneInput = document.querySelector("#phone");
+const iti = window.intlTelInput(phoneInput, {
+    separateDialCode: true,
+    initialCountry: "auto",
+    geoIpLookup: function(success, failure) {
+        fetch("https://ipapi.co/json")
+            .then(res => res.json())
+            .then(data => success(data.country_code))
+            .catch(() => success("US"));
+    },
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+    preferredCountries: ['in', 'us', 'gb'], // India, US, UK at the top
+    separateDialCode: true
+});
+
+// Update your EmailJS templateParams to include the phone
+// Inside your contactForm.onsubmit:
+const templateParams = {
+    name: this.Name.value,
+    email: this.Email.value,
+    phone: iti.getNumber(), // This sends the full number with +91 etc.
+    // ... rest of your params
+};
+
 });
 
 // 5. EXTERNAL FUNCTION (MUST BE OUTSIDE DOMContentLoaded)
@@ -183,17 +242,17 @@ const memberInfo = {
     },
     "ISAIAH": { 
         role: "Vocalist & Keyboardist", 
-        bio: "A true virtuoso of the keys. Isaiah brings the thunderous energy of Rock & Roll piano legends, keeping the tempo high and the crowd on their feet with every rhythmic strike.", 
-        img: "isaiah.png" 
+        bio: "The melodic soul of the Prophets. While he provides the essential rhythmic foundation on the keys, Isaiah’s true mastery lies in his vocal range. Bringing a rich, commanding presence to every performance, he breathes new life into classic harmonies and modern hits alike.", 
+        img: "isaiah.jpeg" 
     },
     "SAMUEL": { 
-        role: "Vocalist & Guitarist", 
-        bio: "The master of the vintage twang. Samuel’s guitar work defines our 1950s aesthetic, blending sharp riffs with powerful vocal support to round out the band's signature style.", 
+       role: "Vocalist & Guitarist", 
+        bio: "The ultimate dual-threat on stage. Samuel brings a seamless balance of technical guitar precision and soulful vocal power to the Prophets. Whether he’s driving the rhythm with iconic vintage riffs or leading a modern anthem, his ability to bridge the gap between strings and song is the heartbeat of our live set.", 
         img: "samuel.jpeg" 
     },
     "DANIEL": { 
-        role: "Vocalist & Guitarist", 
-        bio: "Pure energy on strings. Daniel brings the grit and groove required for high-octane performance, ensuring that every song resonates with the power of original Rock & Roll.", 
+       role: "Vocalist & Guitarist", 
+        bio: "The powerhouse of the Prophets' signature sound. A master of the fretboard, Daniel brings high-octane energy and world-class guitar precision to every stage. While his electrifying lead work drives our biggest hits, his sharp vocal harmonies add that essential layer of depth, making every performance feel truly massive.", 
         img: "daniel.jpeg" 
     }
 };
@@ -218,3 +277,39 @@ function closeModal() {
     document.getElementById('memberModal').style.display = 'none';
     document.body.style.overflow = 'auto'; // Restoration of scrolling
 }
+
+document.getElementById('copySetlistBtn').addEventListener('click', function() {
+    const rows = document.querySelectorAll('#setlistBody tr');
+    let setlistText = "🎵 OUR REQUESTED SETLIST:\n\n";
+    let hasSongs = false;
+
+    rows.forEach((row, index) => {
+        const song = row.querySelector('input[name="Song[]"]').value.trim();
+        const artist = row.querySelector('input[name="Artist[]"]').value.trim();
+
+        if (song || artist) {
+            setlistText += `${index + 1}. ${song || "TBD"} - ${artist || "TBD"}\n`;
+            hasSongs = true;
+        }
+    });
+
+    if (!hasSongs) {
+        alert("Add some songs first, bro!");
+        return;
+    }
+
+    // Copy to Clipboard
+    navigator.clipboard.writeText(setlistText).then(() => {
+        const originalText = this.innerHTML;
+        this.innerHTML = "✅ COPIED!";
+        this.style.color = "#ffd700";
+        
+        // Reset button text after 2 seconds
+        setTimeout(() => {
+            this.innerHTML = originalText;
+            this.style.color = "";
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+});
